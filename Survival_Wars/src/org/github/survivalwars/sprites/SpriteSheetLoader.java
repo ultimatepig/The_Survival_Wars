@@ -13,7 +13,6 @@ public class SpriteSheetLoader {
 	}
 
 	public void grabTile(int tile, int width, int height) {
-		pixels = new int[width * height];
 		int xTile = tile % 16;
 		int yTile = tile % 16;
 		for (int y = 0; y < height; y++) {

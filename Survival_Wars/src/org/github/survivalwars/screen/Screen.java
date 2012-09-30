@@ -18,9 +18,9 @@ public class Screen {
 		xPos = xOffset;
 		yPos = yOffset;
 		for(int y = 0; y < height; y++){
-			if(yPos + y < 0 || yPos + y <= height)continue;
+			if(yPos + y < 0 || yPos + y >= height)continue;
 			for(int x = 0; x < width; x++){
-				if(xPos + x < 0 || xPos + x <= width)continue;
+				if(xPos + x < 0 || xPos + x >= width)continue;
 				int col = loader.pixels[x + (y * height)];
 			}
 		}

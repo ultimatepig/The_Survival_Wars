@@ -39,6 +39,9 @@ public class Game extends Canvas implements Runnable {
 			requestFocus();
 			return;
 		}
+		for (int i = 0; i < screen.pixels.length; i++) {
+			pixels[i] = screen.pixels[i];
+		}
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, null);
 		g.dispose();
@@ -46,20 +49,16 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void tick() {
-		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = r.nextInt();
-		}
+		screen.render(0, 0, 0, 16, 16);
 	}
 
 	public void init() {
 		BufferedImage sheet = null;
 		try {
-			loader = new SpriteSheetLoader(ImageIO.read(Game.class
-					.getResourceAsStream("/tiles.png")));
+			sheet = ImageIO.read(Game.class.getResourceAsStream("/tiles.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		loader = new SpriteSheetLoader(sheet);
 	}
 
 	public void start() {
@@ -68,9 +67,15 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public void run() {
+		init();
 		while (running) {
 			tick();
 			render();
+			try {
+				Thread.sleep(5);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
